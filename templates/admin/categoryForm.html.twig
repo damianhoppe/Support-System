@@ -1,0 +1,19 @@
+<form method="post">
+    <select name="parentCategory">
+        <option value="none">Brak (kategoria główna)</option>
+        {{ include('@utils/categoryOptions.html.twig', {'categories': categories, 'offset': '-', 'selectedCategoryId': selectedCategoryId|default(null) }) }}
+    </select>
+    <input type="text" name="title" placeholder="Tytuł"/>
+    <input type="text" name="icon" placeholder="Ikona"/>
+
+    {% if action == 'new' %}
+        <button type="submit">Dodaj</button>
+    {% endif %}
+    {% if action == 'new' %}
+        <button type="submit" name="continue" value="">Dodaj i kontynuuj</button>
+    {% endif %}
+    {% if action == 'edit' %}
+        <button type="submit">Zapisz</button>
+        <button type="submit" name="continue" value="">Zapisz i kontynuuj</button>
+    {% endif %}
+</form>

@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="blurry-filter"></div>
+    <header>
+        <div class="container">
+            <a href="/"><h1>{{'title.main'|trans}}</h1></a>
+
+            <div class="flex-row align-items-center">
+                <div class="account-info">
+                    {% if (app.user ?? null) is null %}
+                        <a href="/login"><button class="button small">{{'login'|trans}}</button></a>
+                    {% endif %}
+                    {% if (app.user ?? null) is not null %}
+                        <input id="input-account-info-popup-switch" class="display-none" type="checkbox" autocomplete="off"/>
+                        <label id="label-account-info-popup-switch" for="input-account-info-popup-switch">
+                            <span class="circle pointer">{{ app.user.name|first|upper }}</span>
+                            <label for="">
+                                <div id="account-info-popup" class="popup">
+                                    <span class="name">{{ app.user.name }}</span>
+                                    <br>
+                                    <a href="/logout"><button class="button small">{{'logout'|trans}}</button></a>
+                                </div>
+                            </label>
+                        </label>
+                    {% endif %}
+                </div>
+                <div class="vertical-divider"></div>
+                <input id="input-theme-switch" class="display-none" type="checkbox" autocomplete="off"/>
+                <label id="label-theme-switch" for="input-theme-switch">
+                        <span class="theme-switch circle no-bg link">
+                            <i data-feather="sun"></i>
+                            <i data-feather="moon"></i>
+                        </span>
+                </label>
+            </div>
+        </div>
+    </header>
+    <main>
+        {% block page_contents %}{% endblock %}
+    </main>
+    <div class="divider before-footer"></div>
+    <footer>
+        <span>
+            {{'title.footer'|trans|raw}}
+        </span>
+        <div class="flex-row">
+            <a href="#" class="circle">
+                <i data-feather="github"></i>
+            </a>
+            <a href="#" class="circle">
+                <i data-feather="linkedin"></i>
+            </a>
+            <a href="#" class="circle">
+                <i data-feather="facebook"></i>
+            </a>
+            <a href="#" class="circle">
+                <i data-feather="instagram"></i>
+            </a>
+            <a href="#" class="circle">
+                <i data-feather="twitter"></i>
+            </a>
+            <a href="#" class="circle">
+                <i data-feather="mail"></i>
+            </a>
+        </div>
+    </footer>
+    {% block scripts %}{% endblock %}
+    <script>
+        feather.replace()
+    </script>
+    <script>
+        function switchTheme(event) {
+            setDarkTheme(event.target.checked);
+        }
+        function setDarkTheme(darkThemeEnabled) {
+            if(darkThemeEnabled) {
+                document.body.classList.add("dark-mode");
+                localStorage.setItem("dark-mode", "true");
+            }else {
+                document.body.classList.remove("dark-mode");
+                localStorage.setItem("dark-mode", "false");
+            }
+        }
+
+        document.getElementById("input-theme-switch").checked = localStorage.getItem("dark-mode") == "true";
+        setDarkTheme(localStorage.getItem("dark-mode") == "true");
+
+        document.getElementById("input-theme-switch").addEventListener("change", (event) => switchTheme(event));
+
+        var accountInfoPopupSwitch = document.getElementById("input-account-info-popup-switch");
+        if(accountInfoPopupSwitch != null) {
+            document.addEventListener("click", (event) => {
+                console.log(event);
+                for(const element of event.path) {
+                    if(element.classList == undefined)
+                        continue;
+                    if(element.classList.contains("account-info"))
+                        return;
+                }
+
+                accountInfoPopupSwitch.checked = false;
+            });
+        }
+    </script>
+{% endblock %}

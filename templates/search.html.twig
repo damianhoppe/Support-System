@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block page_contents %}
+    <section id="search-section" class="main-section">
+        <h2>{{'search'|trans}}</h2>
+        <form action="/" method="get">
+            <div class="button search flex-row">
+                <input type="text" name="q" value="{{ query }}"/>
+                <button type="submit">
+                    <i data-feather="search"></i>
+                </button>
+            </div>
+        </form>
+    </section>
+    <section class="search-result-section">
+        {{ include('searchResult.html.twig') }}
+    </section>
+    <div class="divider"></div>
+    {{ include('contactSection.html.twig') }}
+{% endblock %}
+{% block scripts %}
+{% endblock %}

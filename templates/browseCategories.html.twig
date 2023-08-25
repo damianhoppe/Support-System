@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if category is defined and category is not null %}
+        {{ category.title }}
+    {% else %}
+        {{ 'title.home'|trans }}
+    {% endif %}
+{% endblock %}
+
+{% block page_contents %}
+    {% set edit = app.user is defined  and app.user is not null and app.user.isAdmin() %}
+    {% if edit %}
+        <ul class="tools">
+            <li><a class="green" href="/admin/categories/new/{{ category.id|default("") }}"><i data-feather="plus"></i>{{ 'category.add'|trans }}</a></li>
+            {% if category is defined and category is not null %}
+                <li><a class="yellow" href="/admin/categories/edit/{{ category.id }}"><i data-feather="edit-2"></i>{{ 'category.edit'|trans }}</a></li>
+                {# <li><a class="violet" href="/admin/categories/copy/{{ category.id }}"><i data-feather="copy"></i>{{ 'category.copy'|trans }}</a></li> #}
+                <li><a class="red" href="/admin/categories/delete/{{ category.id }}"><i data-feather="trash-2"></i>{{ 'category.delete'|trans }}</a></li>
+                <li><a href="/admin/categories/{{ category.id }}/questions/new"><i data-feather="plus"></i>{{ 'question.add'|trans }}</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+    {% set root_category = categoriesTree is not defined or categoriesTree is empty %}
+    {% if root_category %}
+        <section class="details-section" style="justify-content: center;">
+    {% else %}
+        <section class="details-section">
+    {% endif %}
+        {% set highlightLast = true %}
+        {% if not root_category %}
+            {{ include('faq/path.html.twig') }}
+        {% endif %}
+        <form action="/" method="get">
+            <div class="button search flex-row small">
+                <input type="text" name="q" placeholder="{{ 'search'|trans }}"/>
+                <button type="submit">
+                    <i data-feather="search"></i>
+                </button>
+            </div>
+        </form>
+    </section>
+    {% set categoriesSize = "small" %}
+    {% set categoriesNotEmpty = categories is defined and categories is not null and categories is not empty %}
+    {% set questionsNotEmpty = questions is defined and questions is not null and questions is not empty %}
+    {% if categoriesNotEmpty != true and questionsNotEmpty != true %}
+        <h2 style="width: 100%; text-align: center; margin-bottom: 32px;">{{ 'category.empty'|trans }}</h2>
+    {% endif %}
+    {% if categoriesNotEmpty %}
+        {{ include('faq/categories.html.twig') }}
+    {% endif %}
+    {% if questionsNotEmpty %}
+        {{ include('faq/questions.html.twig') }}
+    {% endif %}
+    <div class="divider"></div>
+    {{ include('contactSection.html.twig') }}
+{% endblock %}

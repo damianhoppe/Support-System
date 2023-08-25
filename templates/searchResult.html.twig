@@ -1,0 +1,19 @@
+{% if questions is not defined or questions is empty %}
+    <h3 class="center">{{'no-results'|trans}}</h3>
+{% endif %}
+{% if questions is defined and questions is not empty %}
+    <h3>{{'results-for'|trans}} <q>{{ query }}</q>: </h3>
+    <ul>
+        {% for question in questions %}
+            <li>
+                <a href="/{{ question.getCategory().getUrl() }}#question-{{ question.id }}">
+                    <i data-feather="chevron-right"></i>
+                    <div class="flex-column">
+                        <spin class="title">{{ question.getTitle() }}</spin>
+                        <spin class="description">{{ question.getContent()|striptags|u.truncate(200, '...', false)|raw|nl2br }}</spin>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

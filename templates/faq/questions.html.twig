@@ -1,0 +1,28 @@
+{% set edit = edit is defined and edit == true %}
+{% if questions is not empty %}
+    <section class="questions-section">
+        <ul>
+            {% for question in questions %}
+                <li id="question-{{ question.id }}">
+                    {% set checkboxName = "question-toggle-#{question.id}" %}
+                    <input type="checkbox" id="{{checkboxName}}" class="checkbox-toggle-content" hidden="true"/>
+                    <label for="{{checkboxName}}">
+                        <div class="container">
+                            <i data-feather="chevron-right"></i>
+                            {{ question.title }}
+                        </div>
+
+                        {% if edit %}
+                            <ul class="tools">
+                                <li><a class="yellow" href="/admin/questions/edit/{{ question.id }}"><i data-feather="edit-2"></i>{{ 'edit'|trans}}</a></li>
+                                {# <li><a class="violet" href="/admin/questions/new/{{ question.id }}"><i data-feather="copy"></i>{{ 'copy'|trans}}</a></li> #}
+                                <li><a class="red" href="/admin/questions/delete/{{ question.id }}"><i data-feather="trash-2"></i>{{ 'delete'|trans}}</a></li>
+                            </ul>
+                        {% endif %}
+                    </label>
+                    <p class="content">{{ question.content|nl2br|raw  }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}

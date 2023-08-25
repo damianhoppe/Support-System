@@ -1,0 +1,13 @@
+<section class="path-section {% if highlightLast is defined and highlightLast %}{{ "highlight-last" }}{% endif %}">
+    <a href="/">
+        <span>{{ 'title.home'|trans }}</span>
+    </a>
+    {% for category in categoriesTree %}
+        <span>
+            <i data-feather="chevron-right"></i>
+            <a href="/{{ category.getUrl() }}">
+                <span>{{ category.getTitle() }}</span>
+            </a>
+        </span>
+        {% endfor %}
+</section>

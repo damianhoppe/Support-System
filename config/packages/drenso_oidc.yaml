@@ -1,0 +1,8 @@
+drenso_oidc:
+    default_client: default
+    clients:
+        default:
+            well_known_url: '%env(OIDC_DEFAULT_CLIENT_WELL_KNOWN_URL)%'
+            client_id: '%env(OIDC_DEFAULT_CLIENT_ID)%'
+            client_secret: '%env(OIDC_DEFAULT_CLIENT_SECRET)%'
+            redirect_route: '%env(OIDC_DEFAULT_CLIENT_REDIRECT_URL)%'

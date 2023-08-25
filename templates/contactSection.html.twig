@@ -1,0 +1,32 @@
+<section id="ask-support-section" class="main-section">
+    <h2>{{ 'ask-support.first-header'|trans }}</h2>
+    <h2>{{ 'ask-support.second-header'|trans }}</h2>
+    <section id="ask-support-links-section" style="grid-template-columns: repeat(1, 1fr);">
+        {#
+        <a class="circle-container" href="/dashboard/newrequest" draggable="false">
+                <span class="circle">
+                    <i data-feather="user"></i>
+                </span>
+            <h3>Za pomocą konta</h3>
+            <span class="text">Za pomocą swojego konta kontakt ze wsparciem staje się prostszy, masz na nim dostęp do wszystkich swoich zgłoszeń.</span>
+        </a>
+        <a class="circle-container" href="/contact" draggable="false">
+                <span class="circle">
+                    <i data-feather="align-left"></i>
+                </span>
+            <h3>Poprzez formularz</h3>
+            <span class="text">Wypełnij formularz, a odpowiedź dostaniesz drogą mailową.</span>
+        </a>
+        #}
+        <span>
+            <a class="circle-container" href="mailto:contact@damianhoppe.pl" draggable="false">
+                <span class="circle">
+                    <i data-feather="at-sign"></i>
+                </span>
+                <h3>{{ 'ask-support.by.email.title'|trans }}</h3>
+                <span class="text">{{ 'ask-support.by.email.description'|trans }}</span>
+            </a>
+            <span class="text" style="cursor: auto; user-select: text;">{{'contact-email'|trans}}</span>
+            </span>
+    </section>
+</section>

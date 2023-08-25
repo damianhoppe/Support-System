@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat</title>
+        <link rel="stylesheet" href="/res/css/style.css"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script src="/res/js/cookies.js"></script>
+        <script src="/res/libs/tinymce/tinymce.min.js"></script>
+    </head>
+    <body>
+        <div class="blurry-filter"></div>
+        <header>
+            <div class="container">
+                <a href="/"><h1>Huq Studio</h1></a>
+
+                <input id="input-theme-switch" class="display-none" type="checkbox" autocomplete="off"/>
+                <label id="label-theme-switch" for="input-theme-switch">
+                        <span class="theme-switch circle no-bg link">
+                            <i data-feather="sun"></i>
+                            <i data-feather="moon"></i>
+                        </span>
+                </label>
+            </div>
+        </header>
+        <main>
+            <section class="chat-section">
+                <h2>Title</h2>
+                <div class="chat-container">
+                    <div class="list">
+                        <div class="chat-item left">
+                            <div class="header">
+                                <div class="icon circle"></div>
+                                <div class="message-info">
+                                    <span class="name">Damian</span><span>,</span>
+                                    <span class="time">dzień temu</span>
+                                </div>
+                            </div>
+                            <div class="message">Witam</div>
+                        </div>
+                        <div class="chat-item right">
+                            <div class="header">
+                                <div class="icon circle"></div>
+                                <div class="message-info">
+                                    <span class="name">Damian</span><span>,</span>
+                                    <span class="time">dzień temu</span>
+                                </div>
+                            </div>
+                            <div class="message">Witam</div>
+                        </div>
+                        <div class="chat-item left">
+                            <div class="header">
+                                <div class="icon circle"></div>
+                                <div class="message-info">
+                                    <span class="name">Damian</span><span>,</span>
+                                    <span class="time">dzień temu</span>
+                                </div>
+                            </div>
+                            <div class="message">Witam</div>
+                        </div>
+                        <div class="chat-item right">
+                            <div class="header">
+                                <div class="icon circle"></div>
+                                <div class="message-info">
+                                    <span class="name">Damian</span><span>,</span>
+                                    <span class="time">dzień temu</span>
+                                </div>
+                            </div>
+                            <div class="message">Witam</div>
+                        </div>
+                        <div class="chat-item left">
+                            <div class="header">
+                                <div class="icon circle"></div>
+                                <div class="message-info">
+                                    <span class="name">Damian</span>,
+                                    <span class="time">dzień temu</span>
+                                </div>
+                            </div>
+                            <div class="message">Witam</div>
+                        </div>
+                    </div>
+                    <div class="response">
+                        <div class="divider"></div>
+                        <h3>Odpowiedz</h3>
+                        <form action="#" method="post">
+                            <textarea id="message"></textarea>
+                            <input type="submit" value="Wyślij"/>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div class="divider before-footer"></div>
+        <footer>
+            <span>
+                Copyright &copy; 2022 All Rights Reserver by Huq Studio
+            </span>
+            <div class="flex-row">
+                <a href="#" class="circle">
+                    <i data-feather="github"></i>
+                </a>
+                <a href="#" class="circle">
+                    <i data-feather="linkedin"></i>
+                </a>
+                <a href="#" class="circle">
+                    <i data-feather="facebook"></i>
+                </a>
+                <a href="#" class="circle">
+                    <i data-feather="instagram"></i>
+                </a>
+                <a href="#" class="circle">
+                    <i data-feather="twitter"></i>
+                </a>
+                <a href="#" class="circle">
+                    <i data-feather="mail"></i>
+                </a>
+            </div>
+        </footer>
+        <script>
+            feather.replace()
+        </script>
+        <script>
+            function initTinyMce(darkMode) {
+                var previousTinyMceInstance = tinymce.get("message");
+                var previousMessage = "";
+                var previousScrollY = window.scrollY;
+                
+                if(previousTinyMceInstance != null) {
+                    previousMessage = previousTinyMceInstance.getContent();
+                   previousTinyMceInstance.destroy();
+               }
+                var options = {
+                  selector: 'textarea#message',
+                  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                  tinycomments_mode: 'embedded',
+                  tinycomments_author: 'Author name',
+                    promotion: false,
+                    init_instance_callback: function(){
+                        window.scrollTo(0, previousScrollY);
+                    },
+                  mergetags_list: [
+                    { value: 'First.Name', title: 'First Name' },
+                    { value: 'Email', title: 'Email' },
+                  ]
+                };
+                if(darkMode) {
+                    options.skin = "oxide-dark";
+                    options.content_css = "dark";
+                }
+                tinymce.init(options);
+                var newTinyMceInstance = tinymce.get("message");
+                if(newTinyMceInstance != null)
+                    newTinyMceInstance.setContent(previousMessage);
+                window.scrollTo(0, previousScrollY);
+            }
+                
+            function switchTheme(event) {
+                setDarkTheme(event.target.checked);
+            }
+            
+            function setDarkTheme(darkThemeEnabled) {
+                if(darkThemeEnabled) {
+                    document.body.classList.add("dark-mode");
+                    localStorage.setItem("dark-mode", "true");
+                }else {
+                    document.body.classList.remove("dark-mode");
+                    localStorage.setItem("dark-mode", "false");
+                }
+                initTinyMce(darkThemeEnabled);
+            }
+
+            document.getElementById("input-theme-switch").checked = localStorage.getItem("dark-mode") == "true";
+            setDarkTheme(localStorage.getItem("dark-mode") == "true");
+
+            document.getElementById("input-theme-switch").addEventListener("change", (event) => switchTheme(event));
+        </script>
+    </body>
+</html>

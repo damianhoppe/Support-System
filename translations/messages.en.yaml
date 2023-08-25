@@ -1,0 +1,32 @@
+contact-email: "kontakt@damianhoppe.pl"
+search: "Search"
+no-results: "No results"
+results-for: "Results for"
+login: "Log in"
+logout: "Log out"
+edit: "Edit"
+delete: "Delete"
+copy: "Copy"
+title:
+  main: "Help Center"
+  footer: "Copyright &copy; 2023 All Rights Reserver by Damian Hoppe"
+  home: 'Home'
+category:
+  add: "Add category"
+  copy: "Copy category"
+  delete: "Delete category"
+  edit: "Edit category"
+  empty: "This category is empty yet"
+  new: "New category"
+question:
+  add: "Add question"
+  delete: "Delete question"
+  edit: "Edit question"
+  new: "New question"
+ask-support:
+  first-header: "Haven't found a solution?"
+  second-header: "Contact us and we will try to help :)"
+  by:
+    email:
+      title: "By email"
+      description: "Send us a request to the email address below and we will respond shortly."

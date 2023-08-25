@@ -1,0 +1,6 @@
+FROM nightoil/symfony-cli:php8.1
+COPY . /home/app
+WORKDIR /home/app
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN composer install
+ENTRYPOINT ["symfony","server:start"]
