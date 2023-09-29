@@ -11,6 +11,8 @@ Ultimately, the project is to offer a contact form and chat support for users (l
  - Login with OpenID Connect
  - Manage categories and questions from administrator account
 
+## [Demo](https://help.damianhoppe.pl)
+
 ## Setup
 To run this project:
 1. Requirements: PHP v8.1+, Database (supported by Doctrine), Symfony CLI
